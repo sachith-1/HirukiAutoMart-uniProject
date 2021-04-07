@@ -278,7 +278,7 @@ $(document).ready(function() {
           var priceEle = $(itemElement)
             .find(".product_price")
             .text()
-            .replace("$", "");
+            .replace("Rs.", "");
           return parseFloat(priceEle);
         },
         name: ".product_name div a"
@@ -311,18 +311,18 @@ $(document).ready(function() {
     if ($("#slider-range").length) {
       $("#slider-range").slider({
         range: true,
-        min: 50000,
-        max: 40000000,
-        values: [50000, 40000000],
+        min: 1000,
+        max: 3000000,
+        values: [50, 400000],
         slide: function(event, ui) {
-          $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+          $("#amount").val("Rs." + ui.values[0] + " - $Rs." + ui.values[1]);
         }
       });
 
       $("#amount").val(
-        "$" +
+        "Rs." +
           $("#slider-range").slider("values", 0) +
-          " - $" +
+          " - Rs." +
           $("#slider-range").slider("values", 1)
       );
       $(".ui-slider-handle").on("mouseup", function() {
@@ -330,10 +330,10 @@ $(document).ready(function() {
           filter: function() {
             var priceRange = $("#amount").val();
             var priceMin = parseFloat(
-              priceRange.split("-")[0].replace("$", "")
+              priceRange.split("-")[0].replace("Rs.", "")
             );
             var priceMax = parseFloat(
-              priceRange.split("-")[1].replace("$", "")
+              priceRange.split("-")[1].replace("Rs.", "")
             );
             var itemPrice = $(this)
               .find(".product_price")
@@ -342,7 +342,7 @@ $(document).ready(function() {
               .remove()
               .end()
               .text()
-              .replace("$", "");
+              .replace("Rs.", "");
 
             return itemPrice > priceMin && itemPrice < priceMax;
           },

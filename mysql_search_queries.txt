@@ -1,0 +1,12 @@
+
+//creating fulltext
+car - alter table car add FULLTEXT(brand,name,colour,fuelType);
+part - alter table part add FULLTEXT(brand,name,disc);
+
+//one
+SELECT name,price,img1,partID,MATCH (brand,name,colour,fuelType) AGAINST ("bmw black sachith  i8")as score
+FROM car WHERE MATCH (brand,name,colour,fuelType) AGAINST ("bmw black sachith i8")> 0 
+ORDER BY score DESC;
+
+
+//two
